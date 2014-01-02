@@ -2,6 +2,8 @@
 
 A template for Ruby-based Alfred 2 workflow development. This project was originally a fork of Zhao Cai's (https://github.com/zhaocai/alfred2-ruby-template) but eventually the differences grew a little bigger, plus it has specific ruby dependencies that made my life easier and make it possible to develop for both OS X Mavericks and also previous versions (which have Ruby 1.8 as default system ruby).
 
+> Note, this is the Ruby 1.8 branch, for OS X previous to Mavericks, such us Lion or Mountain Lion.
+
 ## Features:
 
 * Use standard [bundler][gembundler] to easily package, manage, and update ruby gems in the workflow.
@@ -24,7 +26,7 @@ A template for Ruby-based Alfred 2 workflow development. This project was origin
 ## Quick Example
 
 ```ruby
-require_relative "bundle/bundler/setup"
+require "bundle/bundler/setup"
 require "alfred"
 
 Alfred.with_friendly_error do |alfred|
@@ -42,7 +44,7 @@ One more example with rescue feedback automatically generated!
 
 ```ruby
 require 'rubygems' unless defined? Gem
-require_relative "bundle/bundler/setup"
+require "bundle/bundler/setup"
 require "alfred"
 
 def my_code_with_something_goes_wrong
