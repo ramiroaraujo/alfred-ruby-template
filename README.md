@@ -107,7 +107,7 @@ Clone or fork this repo to your local directory:
 `git clone https://github.com/ramiroaraujo/alfred-ruby-template.git`
 
 ### Step 2: Config.yml
-Update **domain**, **id**, **name**, **description**, **created_by**, ****website** and **readme** in the `config.yml` file.
+Update **domain**, **id**, **name**, **description**, **created_by**, **website** and **readme** in the `config.yml` file.
 
 ```yaml
 ## workflow build config
