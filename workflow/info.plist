@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>me.zhaowu.alfred2-ruby-template</string>
+	<string>com.tumblr.ramiroaraujo.alfred-ruby-template</string>
 	<key>connections</key>
 	<dict>
 		<key>21557827-8003-42B7-A042-16D4C9278FEC</key>
@@ -30,7 +30,7 @@
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string>Zhao Cai</string>
+	<string>Ramiro Araujo</string>
 	<key>description</key>
 	<string>A starting place for developing Ruby based workflow in Alfred</string>
 	<key>disabled</key>
@@ -138,6 +138,6 @@
 		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string>https://github.com/zhaocai/alfred2-ruby-template</string>
+	<string>https://github.com/ramiroaraujo/alfred-ruby-template</string>
 </dict>
 </plist>

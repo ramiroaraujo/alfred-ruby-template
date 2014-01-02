@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'rubygems' unless defined? Gem
 require_relative "bundle/bundler/setup"
 require "alfred"
 
