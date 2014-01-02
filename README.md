@@ -1,0 +1,2 @@
+alfred-ruby-template
+====================
