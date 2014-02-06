@@ -2,8 +2,8 @@
 # encoding: utf-8
 
 require 'rubygems' unless defined? Gem
-require "bundle/bundler/setup"
-require "alfred"
+require 'bundle/bundler/setup'
+require 'alfred'
 
 
 def something_goes_wrong
@@ -16,6 +16,6 @@ Alfred.with_friendly_error do |alfred|
   fb = alfred.feedback
 
   if something_goes_wrong
-    raise Alfred::NoBundleIDError, "Wrong Bundle ID Test!"
+    raise Alfred::NoBundleIDError, 'Wrong Bundle ID Test!'
   end
 end
