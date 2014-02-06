@@ -5,51 +5,51 @@ require 'plist'
 
 config_file = 'config.yml'
 
-workflow_home = File.expand_path("~/Library/Application Support/Alfred 2/Alfred.alfredpreferences/workflows")
+workflow_home = File.expand_path('~/Library/Application Support/Alfred 2/Alfred.alfredpreferences/workflows')
 
 $config = YAML.load_file(config_file)
-$config["bundleid"] = "#{$config["domain"]}.#{$config["id"]}"
-$config["plist"] = File.join($config["path"], "info.plist")
-$config["workflow_dbx"] = File.join(File.expand_path($config["dropbox"]), "/Alfred.alfredpreferences/workflows")
+$config['bundleid'] = "#{$config['domain']}.#{$config['id']}"
+$config['plist'] = File.join($config['path'], 'info.plist')
+$config['workflow_dbx'] = File.join(File.expand_path($config['dropbox']), '/Alfred.alfredpreferences/workflows')
 
 # import sub-rakefiles
 FileList['*/Rakefile'].each { |file|
   import file
 }
 
-desc "Update config"
+desc 'Update config'
 task :config do
   modified = false
 
-  info = Plist::parse_xml($config["plist"])
+  info = Plist::parse_xml($config['plist'])
 
-  if info['bundleid'] != $config["bundleid"]
-    info['bundleid'] = $config["bundleid"]
+  if info['bundleid'] != $config['bundleid']
+    info['bundleid'] = $config['bundleid']
     modified = true
   end
-  if info['createdby'] != $config["created_by"]
-    info['createdby'] = $config["created_by"]
+  if info['createdby'] != $config['created_by']
+    info['createdby'] = $config['created_by']
     modified = true
   end
-  if info['description'] != $config["description"]
-    info['description'] = $config["description"]
+  if info['description'] != $config['description']
+    info['description'] = $config['description']
     modified = true
   end
-  if info['name'] != $config["name"]
-    info['name'] = $config["name"]
+  if info['name'] != $config['name']
+    info['name'] = $config['name']
     modified = true
   end
-  if info['webaddress'] != $config["website"]
-    info['webaddress'] = $config["website"]
+  if info['webaddress'] != $config['website']
+    info['webaddress'] = $config['website']
     modified = true
   end
-  if info['readme'] != $config["readme"]
-    info['readme'] = $config["readme"]
+  if info['readme'] != $config['readme']
+    info['readme'] = $config['readme']
     modified = true
   end
 
-  if modified == true
-    File.open($config["plist"], "wb") { |file| file.write(info.to_plist) }
+  if modified
+    File.open($config['plist'], 'wb') { |file| file.write(info.to_plist) }
   end
 end
 
@@ -57,8 +57,8 @@ task :chdir => [:config] do
   chdir $config['path']
 end
 
-desc "Install Gems"
-task "bundle:install" => [:chdir] do
+desc 'Install Gems'
+task 'bundle:install' => [:chdir] do
   sh %Q{bundle install --standalone --clean} do |ok, res|
     if !ok
       puts "fail to install gems (status = #{res.exitstatus})"
@@ -66,8 +66,8 @@ task "bundle:install" => [:chdir] do
   end
 end
 
-desc "Update Gems"
-task "bundle:update" => [:chdir] do
+desc 'Update Gems'
+task 'bundle:update' => [:chdir] do
   sh %Q{bundle update && bundle install --standalone --clean} do |ok, res|
     if !ok
       puts "fail to update gems (status = #{res.exitstatus})"
@@ -75,39 +75,39 @@ task "bundle:update" => [:chdir] do
   end
 end
 
-desc "Install to Alfred"
+desc 'Install to Alfred'
 task :install => [:config] do
-  ln_sf File.expand_path($config["path"]), File.join(workflow_home, $config["bundleid"])
+  ln_sf File.expand_path($config['path']), File.join(workflow_home, $config['bundleid'])
 end
 
-desc "Unlink from Alfred"
+desc 'Unlink from Alfred'
 task :uninstall => [:config] do
-  rm File.join(workflow_home, $config["bundleid"])
+  rm File.join(workflow_home, $config['bundleid'])
 end
 
-desc "Install to Dropbox"
+desc 'Install to Dropbox'
 task :dbxinstall => [:config] do
-  ln_sf File.expand_path($config["path"]), File.join($config["workflow_dbx"], $config["bundleid"])
+  ln_sf File.expand_path($config['path']), File.join($config['workflow_dbx'], $config['bundleid'])
 end
 
-desc "Unlink from Dropbox"
+desc 'Unlink from Dropbox'
 task :dbxuninstall => [:config] do
-  rm File.join($config["workflow_dbx"], $config["bundleid"])
+  rm File.join($config['workflow_dbx'], $config['bundleid'])
 end
 
-desc "Clean up all the extras"
+desc 'Clean up all the extras'
 task :clean => [:config] do
 end
 
-desc "Remove any generated file"
+desc 'Remove any generated file'
 task :clobber => [:clean] do
-  rmtree File.join($config["path"], ".bundle")
-  rmtree File.join($config["path"], "bundle")
+  rmtree File.join($config['path'], '.bundle')
+  rmtree File.join($config['path'], 'bundle')
 end
 
-desc "Create packed Workflow"
+desc 'Create packed Workflow'
 task :export => [:config] do
-  ruby_version = RbConfig::CONFIG["ruby_version"]
+  ruby_version = RbConfig::CONFIG['ruby_version']
 
   filename = "#{$config['id'].chomp '-workflow'}.alfredworkflow"
   output = 'output'
